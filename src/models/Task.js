@@ -20,6 +20,10 @@ const TaskSchema = new mongoose.Schema({
     canceled: {
         type:Boolean,
         required: true
+    },
+    user:{
+        type: mongoose.Types.ObjectId,
+        required: true
     }
 });
 
