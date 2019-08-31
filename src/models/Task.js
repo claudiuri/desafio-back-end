@@ -13,8 +13,14 @@ const TaskSchema = new mongoose.Schema({
         type: Date,
         required: true
     },
-    done: Boolean,
-    canceled: Boolean
+    done: {
+        type:Boolean,
+        required: true
+    },
+    canceled: {
+        type:Boolean,
+        required: true
+    }
 });
 
 module.exports = mongoose.model('Task', TaskSchema);

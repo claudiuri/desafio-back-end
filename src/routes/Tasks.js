@@ -1,4 +1,5 @@
 const express = require('express');
+const validateObjectId = require('../middlewares/validateObjectId');
 const Task = require('../models/Task');
 const router = express.Router();
 
@@ -7,11 +8,11 @@ router.get('/', async(req, res) =>{
         const tasks = await Task.find();
         res.send(tasks);
     } catch (error) {
-        res.status(400).send(error);
+        next(error)
     }
 });
 
-router.get('/:id', async(req, res) =>{
+router.get('/:id', validateObjectId, async(req, res) =>{
     try {
         const task = await Task.findById(req.params.id);
 
@@ -19,32 +20,32 @@ router.get('/:id', async(req, res) =>{
 
         res.send(task);
     } catch (error) {
-        res.status(400).send(error);
+        next(error)
     }
 });
 
 router.post('/', async(req, res) =>{
     try {
-        const task = await Task.findById(req.params.id);
+        const task = await Task.create(req.body);
 
         res.send(task);
     } catch (error) {
-        res.status(400).send(error);
+        next(error)
     }
 });
 
-router.put('/:id', async(req, res) =>{
+router.put('/:id', validateObjectId, async(req, res) =>{
     try {
         const task = await Task.findByIdAndUpdate(req.params.id, req.body);
     
         if (!task) return res.status(404).send({message: "Invalid task"});
 
     } catch (error) {
-        res.status(400).send(error);
+        next(error)
     }
 });
 
-router.delete('/:id', async(req, res) =>{
+router.delete('/:id', validateObjectId, async(req, res) =>{
     try {
         const task = await Task.findByIdAndRemove(req.params.id);
 
@@ -52,7 +53,7 @@ router.delete('/:id', async(req, res) =>{
 
         res.send({message: "Task deleted"});
     } catch (error) {
-        res.status(400).send(error);
+        next(error)
     }
 });
 
