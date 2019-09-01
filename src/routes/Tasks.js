@@ -6,7 +6,10 @@ const router = express.Router();
 
 router.get('/', auth,async(req, res, next) =>{
     try {
-        const tasks = await Task.find({ user: req.user._id });
+        let { userId } = req.session;
+
+        const tasks = await Task.find({ user: userId });
+
         res.send(tasks);
     } catch (error) {
         next(error)
@@ -28,7 +31,7 @@ router.get('/:id', [validateObjectId, auth], async(req, res, next) =>{
 router.post('/', auth,async(req, res, next) =>{
     try {
         
-        req.body["user"] = req.user._id;
+        req.body["user"] = req.session.userId;
 
         let task = await Task.create(req.body);
 
@@ -43,6 +46,8 @@ router.put('/:id', [validateObjectId, auth], async(req, res, next) =>{
         const task = await Task.findByIdAndUpdate(req.params.id, req.body);
     
         if (!task) return res.status(404).send({message: "Invalid task"});
+
+        res.send(task);
 
     } catch (error) {
         next(error)

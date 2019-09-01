@@ -23,7 +23,8 @@ const TaskSchema = new mongoose.Schema({
     },
     user:{
         type: mongoose.Types.ObjectId,
-        required: true
+        required: true,
+        select: false
     }
 });
 
