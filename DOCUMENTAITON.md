@@ -33,7 +33,7 @@ Depois de [instalar](#instalação) e criar as variáveis de ambiente basta exec
 | `api/tasks/:id`    DEL                  | remoção de tarefa |
 | `api/tasks/:id`    PUT                  | atualização de tarefa |
 
-Para usuário conseguir cadastrar, listar, atualizar e deletar ele precisa está logado ou acabaod de fazer o cadastro
+Para usuário conseguir cadastrar, listar, atualizar e deletar ele precisa está logado ou acabado de fazer o cadastro
 
 * Cadastro de usuário
 
@@ -65,5 +65,77 @@ Para usuário conseguir cadastrar, listar, atualizar e deletar ele precisa está
   {
 	/** NÃO PRECISA ENVIAR NADA **/
   }
+
+```
+
+### Tarefas
+
+* Cadastro da tarefa 
+
+```
+POST
+
+{
+  "name": "Estudar matematica",
+  "description": "estudar para o prova",
+  "date": "2019-05-12",
+  "done": false,
+  "canceled": false
+}
+
+```
+
+* Listagem das tarefas
+  
+
+```
+GET
+
+[
+    {
+        "_id": "5d6aa50f04a26e2b889d76fe",
+        "name": "Estudar matematica",
+        "description": "estudar para o prova",
+        "date": "2019-05-12T00:00:00.000Z",
+        "done": true,
+        "canceled": true,
+        "__v": 0
+    },
+    {
+        "_id": "5d6b0e3f3f82e433e0c1e8ec",
+        "name": "Estudar matematica",
+        "description": "estudar para o prova",
+        "date": "2019-05-12T00:00:00.000Z",
+        "done": false,
+        "canceled": false,
+        "__v": 0
+    }
+]
+```
+
+* Listar apenas uma tarefa
+
+```
+GET http://localhost:3333/api/tasks/:id (_id da tarefa)
+```
+
+* Deletar tarefa
+
+```
+DEL http://localhost:3333/api/tasks/:id (_id da tarefa)
+```
+
+* Atualizar tarefa
+  
+```
+PUT http://localhost:3333/api/tasks/:id (_id da tarefa)
+
+{
+  "name": "Estudar matematica",
+  "description": "estudar para o prova",
+  "date": "2019-05-12",
+  "done": false,
+  "canceled": false
+}
 
 ```
