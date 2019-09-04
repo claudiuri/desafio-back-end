@@ -139,3 +139,6 @@ PUT http://localhost:3333/api/tasks/:id (_id da tarefa)
 }
 
 ```
+# Contato :envelope:
+* E-mail: claudio.y07@gmail.com
+* Linkedin: https://www.linkedin.com/in/claudiuri/
